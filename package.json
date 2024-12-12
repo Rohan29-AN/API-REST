@@ -1,7 +1,7 @@
 {
-  "name": "api-rest",
+  "name": "api_rest",
   "version": "1.0.0",
-  "description":",
+  "description": "This project demonstrates how to create a REST API . Shurorororo",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
