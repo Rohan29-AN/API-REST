@@ -25,5 +25,10 @@ module.exports ={
         writeUsers(users);
 
         res.status(201).json({message:'User registered successfully',user:newUser})
+    },
+
+    async login(req,res){
+        
     }
+
 }
