@@ -1,10 +1,13 @@
-const express= require("express");
+const express = require("express");
 const { getUsers, updateUser } = require("../controllers/userController");
-const authRoutes = require('./authRoutes')
-const router= express.Router()
+const authRoutes = require('./authRoutes');
+const { validateInput } = require("../middlewares/validateInput");
 
-router.get('/',getUsers)
-router.put('/:id',updateUser)
+const { updateUserSchema } = require("../schemas/userSchema");
+const router = express.Router()
+
+router.get('/', getUsers)
+router.put('/:id', validateInput(updateUserSchema), updateUser)
 router.use('/auth', authRoutes);
 
-module.exports= router;
+module.exports = router;
