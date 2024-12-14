@@ -11,3 +11,8 @@ const registerSchema = Joi.object({
     email,
     password
 })
+
+module.exports = {
+    loginSchema,
+    registerSchema
+}
