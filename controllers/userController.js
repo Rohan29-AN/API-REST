@@ -1,10 +1,10 @@
-const { sanitizeUserData } = require('../services/userService')
-const {readUsers} = require('../utils/fileHandler')
+const { sanitizeUserData, findUserIndex, getAllUsers } = require('../services/userService')
+const { readUsers } = require('../utils/fileHandler')
 
-module.exports={
+module.exports = {
 
-    async getUsers(req,res){
-        const users= readUsers()
+    async getUsers(req, res) {
+        const users = readUsers()
         //NOTE: Exclude users's password in the response
         const sanitizedUsers = users.map(sanitizeUserData)
 
@@ -14,5 +14,20 @@ module.exports={
             message: 'Users retrieved successfully',
             data: sanitizedUsers
         })
+    },
+
+    async updateUser(req, res) {
+        const userId = req.params.id
+        const updatedData = req.body
+
+        //find user and replace their data
+        const users = await getAllUsers()
+        const userIndex = await findUserIndex(users, userId)
+        if (userIndex == -1) {
+            return res.status(404).json({ message: 'User not found' })
+        }
+
+        users[userIndex] = { ...users[userIndex], ...updatedData }
+        res.status(200).json({ message: 'User updated successfully', user: users[userIndex] })
     }
 }
