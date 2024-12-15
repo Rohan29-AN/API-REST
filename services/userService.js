@@ -21,7 +21,7 @@ module.exports = {
     },
 
     async findUserById(userId) {
-        const users = await this.getAllUsers();
+        const users = await module.exports.getAllUsers();
         return users.find(user => user.id == userId)
     }
 
