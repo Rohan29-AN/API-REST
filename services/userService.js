@@ -18,6 +18,11 @@ module.exports = {
     async findUserIndex(users, userId) {
         const userIndex = users.findIndex(user => user.id === userId)
         return userIndex
+    },
+
+    async findUserById(userId) {
+        const users = await this.getAllUsers();
+        return users.find(user => user.id == userId)
     }
 
 
