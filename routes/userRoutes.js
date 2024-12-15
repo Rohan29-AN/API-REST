@@ -1,13 +1,16 @@
 const express = require("express");
-const { getUsers, updateUser } = require("../controllers/userController");
+const { getUsers, updateUser, updateUserEmail } = require("../controllers/userController");
 const authRoutes = require('./authRoutes');
 const { validateInput } = require("../middlewares/validateInput");
 
-const { updateUserSchema } = require("../schemas/userSchema");
+const { updateUserSchema, updateEmailSchema } = require("../schemas/userSchema");
 const router = express.Router()
+
+router.use('/auth', authRoutes);
 
 router.get('/', getUsers)
 router.put('/:id', validateInput(updateUserSchema), updateUser)
-router.use('/auth', authRoutes);
+router.patch('/:id/email', validateInput(updateEmailSchema), updateUserEmail)
+
 
 module.exports = router;

@@ -18,8 +18,13 @@ const updateUserSchema = Joi.object({
     password
 })
 
+const updateEmailSchema = Joi.object({
+    email
+})
+
 module.exports = {
     loginSchema,
     registerSchema,
-    updateUserSchema
+    updateUserSchema,
+    updateEmailSchema
 }

@@ -1,4 +1,4 @@
-const { sanitizeUserData, findUserIndex, getAllUsers } = require('../services/userService')
+const { sanitizeUserData, findUserIndex, getAllUsers, findUserById } = require('../services/userService')
 const { readUsers } = require('../utils/fileHandler')
 
 module.exports = {
@@ -29,5 +29,24 @@ module.exports = {
 
         users[userIndex] = { ...users[userIndex], ...updatedData }
         res.status(200).json({ message: 'User updated successfully', user: users[userIndex] })
+    },
+
+    async updateUserEmail(req, res) {
+        const userId = req.params.id
+        const { email } = req.body
+
+        const user = await findUserById(userId)
+
+        if (!user) {
+            return res.status(404).json({ message: "User not found" })
+        }
+        else {
+            user.email = email
+            res.status(200).json({
+                message: 'Email updated successfully',
+                user
+            })
+        }
+
     }
 }
