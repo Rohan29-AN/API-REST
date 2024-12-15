@@ -48,5 +48,19 @@ module.exports = {
             })
         }
 
+    },
+
+    async deleteUser(req, res) {
+        const userId = req.params.id
+        const users = await getAllUsers()
+
+        const userIndex = await findUserIndex(users, userId)
+        if (userIndex == -1) {
+            return res.status(404).json({ message: 'User not found' })
+        }
+        else {
+            const deletedUser = users.splice(userIndex, 1)
+            res.status(200).json({ message: 'User deleted successfully', user: deletedUser })
+        }
     }
 }
