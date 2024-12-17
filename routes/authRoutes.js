@@ -12,33 +12,73 @@ const router= express.Router()
  *       type:  object
  *       properties:
  *         id:
- *           type:  String
+ *           type:  string
  *           description:  The user id
  *         username:
- *           type:  String
+ *           type:  string
  *           description: The user's name
  *         email:
- *           type:  String
+ *           type:  string
  *           description:  The user's email
  *         roles:
  *           type:  Array
  *           description:  The user's roles
  *           items:
- *             type:  String
+ *             type:  string
  *         profileImage:
- *           type:  String
+ *           type:  string
  *           description:  Link to the user's profile picture
  *         createdAt:
- *           type:  String
+ *           type:  string
  *           description:  User creation date
  *         updateAt:
- *           type:  String
+ *           type:  string
  *           description:  Date of modification of user data
  *           
  */
 
 
+/**
+ * @swagger
+ * /api/users/auth/register:
+ *   post:
+ *     summary:  Register a new user
+ *     tags:  [users]
+ *     requestBody:
+ *       required:  true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type:  object
+ *             properties:
+ *               username:  
+ *                 type:  string
+ *                 description: The user's name
+ *               email:
+ *                 type:  string
+ *                 format:  email
+ *                 description:  The user's email
+ *               password: 
+ *                 type:  string
+ *                 minLength:  8
+ *                 description:  The user's password
+ *     responses:
+ *       201:
+ *         description:  Successful operation
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type:  object
+ *               properties: 
+ *                 message:  
+ *                   type:  string
+ *                   description:  The response message  
+ *                 user:
+ *                   $ref:  '#/components/schemas/User'  
+ */
 router.post('/register',validateInput(registerSchema), register);
+
+
 router.post('/login',validateInput(loginSchema),login);
 
 module.exports= router;
