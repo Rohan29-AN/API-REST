@@ -2,8 +2,9 @@ const express = require('express');
 const routes = require('./routes');
 const { logger } = require('./middlewares/logger');
 require('dotenv').config();
-const PORT = process.env.PORT 
-
+const PORT = process.env.PORT
+const swaggerUi = require("swagger-ui-express")
+const swaggerSpec = require('./config/swaggerConfig')
 const app = express();
 
 // Middleware
@@ -13,8 +14,12 @@ app.use(logger)
 // Routes
 app.use('/api', routes);
 
-app.listen(PORT,()=>{
-    console.log("Server is running on PORT ",PORT)
+//Swagger documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
+
+
+app.listen(PORT, () => {
+    console.log("Server is running on PORT ", PORT)
 })
 
 module.exports = app;
