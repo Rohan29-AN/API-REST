@@ -1,8 +1,8 @@
-const express= require("express");
+const express = require("express");
 const { register, login } = require("../controllers/authController");
 const { validateInput } = require("../middlewares/validateInput");
-const {loginSchema,registerSchema} = require('../schemas/userSchema')
-const router= express.Router()
+const { loginSchema, registerSchema } = require('../schemas/userSchema')
+const router = express.Router()
 
 /**
  * @swagger
@@ -20,6 +20,9 @@ const router= express.Router()
  *         email:
  *           type:  string
  *           description:  The user's email
+ *         password:
+ *           type:  string
+ *           description:  The user's password
  *         roles:
  *           type:  Array
  *           description:  The user's roles
@@ -74,11 +77,56 @@ const router= express.Router()
  *                   type:  string
  *                   description:  The response message  
  *                 user:
- *                   $ref:  '#/components/schemas/User'  
+ *                   $ref:  '#/components/schemas/User'   
  */
-router.post('/register',validateInput(registerSchema), register);
+router.post('/register', validateInput(registerSchema), register);
 
 
-router.post('/login',validateInput(loginSchema),login);
+/**
+ * @swagger
+ * /api/users/auth/login:
+ *   post:
+ *     summary:  Authentification
+ *     tags:  [users]
+ *     requestBody:
+ *       required:  true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type:  object
+ *             properties:
+ *               email:
+ *                 type:  string
+ *                 format:  email
+ *                 description:  The user's email
+ *               password: 
+ *                 type:  string
+ *                 minLength:  8
+ *                 description:  The user's password
+ *     responses:
+ *       200:
+ *         description:  Successful operation
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type:  object
+ *               properties: 
+ *                 message:  
+ *                   type:  string
+ *                   description:  The response message  
+ *                 user:
+ *                   $ref:  '#/components/schemas/User'  
+  *       401:
+ *         description:  Invalid email or password
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type:  object
+ *               properties: 
+ *                 message:  
+ *                   type:  string
+ *                   description:  The response message
+ */
+router.post('/login', validateInput(loginSchema), login);
 
-module.exports= router;
+module.exports = router;
