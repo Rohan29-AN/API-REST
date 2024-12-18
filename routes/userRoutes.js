@@ -140,7 +140,64 @@ router.get('/', getUsers)
  *         $ref:  '#/components/responses/ValidationError'
  */
 router.put('/:id', validateInput(updateUserSchema), updateUser)
+
+
+/**
+ * @swagger
+ * /api/users/{id}/email:
+ *   patch:
+ *     summary:  Update the user's email address
+ *     tags:  [users]
+ *     parameters:
+ *       - name:  id
+ *         in:  path
+ *         description:  The user ID
+ *         required:  true
+ *         schema:  
+ *           type:  integer
+ *     requestBody:
+ *       required:  true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type:  object
+ *             properties:  
+ *               email:
+ *                 type:  string
+ *                 format:  email
+ *                 description:  The new email address
+ *     responses:
+ *       200:
+ *         description:  Successful operation
+ *         content: 
+ *           application/json:
+ *             schema:
+ *               type:  object
+ *               properties:
+ *                 message:
+ *                   type:  string
+ *                   description:  The response message
+ *                 user:
+ *                   $ref:  '#/components/schemas/User'
+ *       404:
+ *         description:  User not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type:  object
+ *               properties:
+ *                 message:
+ *                   description:  The error message
+ *                   type:  string
+ *                   example:  User not found
+ *       400:
+ *         $ref:  '#/components/responses/ValidationError'
+ *            
+ */
 router.patch('/:id/email', validateInput(updateEmailSchema), updateUserEmail)
+
+
+
 router.delete('/:id', deleteUser)
 
 module.exports = router;
