@@ -24,7 +24,7 @@ router.use('/auth', authRoutes);
  *           type:  string
  *           description:  The user's email
  *         roles:
- *           type:  Array
+ *           type:  array
  *           description:  The user's roles
  *           items:
  *             type:  string

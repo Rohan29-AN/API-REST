@@ -24,7 +24,7 @@ const router = express.Router()
  *           type:  string
  *           description:  The user's password
  *         roles:
- *           type:  Array
+ *           type:  array
  *           description:  The user's roles
  *           items:
  *             type:  string
