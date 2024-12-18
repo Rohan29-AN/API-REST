@@ -40,6 +40,24 @@ router.use('/auth', authRoutes);
  *           
  */
 
+
+/**
+ * @swagger
+ * components:
+ *   responses:
+ *     ValidationError:
+ *       description:  Validation failed
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type:  object
+ *             properties:  
+ *               message:
+ *                 type:  string
+ *                 description:  Error message
+ *       
+ */
+
 /**
  * @swagger
  * /api/users:
@@ -118,7 +136,8 @@ router.get('/', getUsers)
  *                   description:  The response message
  *                 user:
  *                   $ref:  '#/components/schemas/User'    
- *  
+ *       400:
+ *         $ref:  '#/components/responses/ValidationError'
  */
 router.put('/:id', validateInput(updateUserSchema), updateUser)
 router.patch('/:id/email', validateInput(updateEmailSchema), updateUserEmail)
