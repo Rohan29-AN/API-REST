@@ -55,7 +55,19 @@ router.use('/auth', authRoutes);
  *               message:
  *                 type:  string
  *                 description:  Error message
- *       
+ *     UserNotFound:
+ *       description:  User not found
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type:  object
+ *             properties:
+ *               message:
+ *                 description:  The error message
+ *                 type:  string
+ *                 example:  User not found
+ *              
+ *             
  */
 
 /**
@@ -180,16 +192,8 @@ router.put('/:id', validateInput(updateUserSchema), updateUser)
  *                 user:
  *                   $ref:  '#/components/schemas/User'
  *       404:
- *         description:  User not found
- *         content:
- *           application/json:
- *             schema:
- *               type:  object
- *               properties:
- *                 message:
- *                   description:  The error message
- *                   type:  string
- *                   example:  User not found
+ *         $ref:  '#/components/responses/UserNotFound'
+ * 
  *       400:
  *         $ref:  '#/components/responses/ValidationError'
  *            
@@ -224,16 +228,7 @@ router.patch('/:id/email', validateInput(updateEmailSchema), updateUserEmail)
  *                 user:
  *                   $ref:  '#/components/schemas/User'
  *       404:
- *         description:  User not found
- *         content:
- *           application/json:
- *             schema:
- *               type:  object
- *               properties:
- *                 message:
- *                   description:  The error message
- *                   type:  string
- *                   example:  User not found           
+ *         $ref:  '#/components/responses/UserNotFound'            
  */
 router.delete('/:id', deleteUser)
 
