@@ -197,7 +197,44 @@ router.put('/:id', validateInput(updateUserSchema), updateUser)
 router.patch('/:id/email', validateInput(updateEmailSchema), updateUserEmail)
 
 
-
+/**
+ * @swagger
+ * /api/users/{id}:
+ *   delete:
+ *     summary:  Delete a user
+ *     tags:  [users]
+ *     parameters:
+ *       - name:  id
+ *         in:  path
+ *         description:  The user's ID to be deleted
+ *         required:  true
+ *         schema:  
+ *           type:  integer
+ *     responses:
+ *       200:
+ *         description:  Successful operation
+ *         content: 
+ *           application/json:
+ *             schema:
+ *               type:  object
+ *               properties:
+ *                 message:
+ *                   type:  string
+ *                   description:  The response message
+ *                 user:
+ *                   $ref:  '#/components/schemas/User'
+ *       404:
+ *         description:  User not found
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type:  object
+ *               properties:
+ *                 message:
+ *                   description:  The error message
+ *                   type:  string
+ *                   example:  User not found           
+ */
 router.delete('/:id', deleteUser)
 
 module.exports = router;
