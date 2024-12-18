@@ -72,6 +72,54 @@ router.use('/auth', authRoutes);
  *                     $ref:  '#/components/schemas/GetUser'
  */
 router.get('/', getUsers)
+
+/**
+ * @swagger
+ * /api/users/{id}: 
+ *   put:
+ *     summary:  Update an existing user (username, email, password)
+ *     tags:  [users]
+ *     parameters:
+ *       - name:  id
+ *         in:  path
+ *         description:  The user id to be changed
+ *         required:  true
+ *         schema:
+ *           type:  integer
+ *     requestBody:
+ *       required:  true
+ *       content:
+ *         application/json:
+ *           schema: 
+ *             type:  object
+ *             properties:  
+ *               username:  
+ *                 type:  string
+ *                 description:  The new name of user
+ *                 minLength:  3
+ *               email:
+ *                 type:  string
+ *                 description: The new email of user
+ *                 format:  email
+ *               password:
+ *                 type:  string
+ *                 description: The new password
+ *                 minLength:  6
+ *     responses:
+ *       200:
+ *         description:  Successful operation    
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type:  object
+ *               properties:
+ *                 message:
+ *                   type:  string
+ *                   description:  The response message
+ *                 user:
+ *                   $ref:  '#/components/schemas/User'    
+ *  
+ */
 router.put('/:id', validateInput(updateUserSchema), updateUser)
 router.patch('/:id/email', validateInput(updateEmailSchema), updateUserEmail)
 router.delete('/:id', deleteUser)
