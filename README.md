@@ -32,6 +32,7 @@ This project is used to demonstrate how to build a simple REST API using Express
     docker-compose up -d
 
 **API Documentation:**
+After starting the server, open http://localhost:3000/api-docs in your browser to view the Swagger UI with API documentation.
 
  **How to contribute:**
 1.  Fork the repository.
