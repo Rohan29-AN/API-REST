@@ -31,6 +31,8 @@ This project is used to demonstrate how to build a simple REST API using Express
 
     docker-compose up -d
 
+**API Documentation:**
+
  **How to contribute:**
 1.  Fork the repository.
 2.  Create a feature branch: `git checkout -b feature-name`.
