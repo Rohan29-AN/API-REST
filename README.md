@@ -40,3 +40,6 @@ After starting the server, open http://localhost:3000/api-docs in your browser t
 3.  Commit your changes: `git commit -m 'Add feature-name'`.
 4.  Push to the branch: `git push origin feature-name`.
 5.  Open a pull request.
+
+Copyright ©️ 
+Rohan29-AN
